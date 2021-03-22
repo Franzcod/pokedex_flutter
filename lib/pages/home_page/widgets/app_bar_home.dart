@@ -28,7 +28,7 @@ class AppBarHome extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(left: 20.0),
                 child: Text(
-                  'PokeAPi',
+                  '',
                   style: TextStyle(
                       fontFamily: 'Google',
                       fontWeight: FontWeight.bold,

@@ -4,6 +4,7 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:poke_api/const/conts_app.dart';
 import 'package:poke_api/models/pokeapi.dart';
 import 'package:poke_api/pages/home_page/widgets/app_bar_home.dart';
+import 'package:poke_api/pages/home_page/widgets/poke_item.dart';
 import 'package:poke_api/stores/pokeapi_store.dart';
 
 class HomePage extends StatefulWidget {
@@ -32,6 +33,18 @@ class _HomePageState extends State<HomePage> {
         clipBehavior: Clip.none,
         //overflow: Overflow.visible,
         children: <Widget>[
+          Positioned(
+            top: -25,
+            left: 10,
+            child: Opacity(
+              opacity: 0.5,
+              child: Image.asset(
+                ConstsApp.pokeapi_img,
+                height: 240,
+                width: 240,
+              ),
+            ),
+          ),
           Positioned(
             top: -(240 / 4.7),
             left: screenWidth - (240 / 1.6),
@@ -71,8 +84,8 @@ class _HomePageState extends State<HomePage> {
                                   itemCount:
                                       pokeApiStore.pokeAPI.pokemon.length,
                                   itemBuilder: (context, index) {
-                                    //Pokemon pokemon =
-                                    //    pokeApiStore.getPokemon(index: index);
+                                    Pokemon pokemon =
+                                        pokeApiStore.getPokemon(index: index);
                                     return AnimationConfiguration.staggeredGrid(
                                       position: index,
                                       duration:
@@ -80,17 +93,13 @@ class _HomePageState extends State<HomePage> {
                                       columnCount: 2,
                                       child: ScaleAnimation(
                                         child: GestureDetector(
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Container(
-                                                color: Colors.greenAccent),
+                                          child: PokeItem(
+                                            types: pokemon.type,
+                                            num: pokemon.num,
+                                            index: index,
+                                            color: Colors.greenAccent,
+                                            name: pokemon.name,
                                           ),
-                                          // child: PokeItem(
-                                          //   types: pokemon.type,
-                                          //   index: index,
-                                          //   name: pokemon.name,
-                                          //   num: pokemon.num,
-                                          // ),
                                           onTap: () {
                                             Navigator.push(
                                                 context,
